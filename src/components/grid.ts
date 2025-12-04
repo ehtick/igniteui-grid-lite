@@ -23,7 +23,7 @@ import { addThemingController } from '../internal/theming.js';
 import type {
   ColumnConfiguration,
   DataPipelineConfiguration,
-  GridSortConfiguration,
+  GridLiteSortingOptions,
   Keys,
 } from '../internal/types.js';
 import { asArray, getFilterOperandsFor, isNumber, isString } from '../internal/utils.js';
@@ -221,9 +221,8 @@ export class IgcGridLite<T extends object> extends EventEmitterBase<IgcGridLiteE
 
   /** Sort configuration property for the grid. */
   @property({ attribute: false })
-  public sortConfiguration: GridSortConfiguration = {
-    multiple: true,
-    triState: true,
+  public sortingOptions: GridLiteSortingOptions = {
+    mode: 'multiple',
   };
 
   /**

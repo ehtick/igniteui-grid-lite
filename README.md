@@ -177,7 +177,7 @@ Ignite UI Grid Lite is designed as a lightweight, open-source alternative to the
   - Summaries and aggregations
   - Excel, PDF, and CSV export
   - Column pinning, hiding, and resizing
-  - Row selection selection
+  - Row selection
   - Paging
   - Multi-column headers and collapsible column groups
   - Cell merging
@@ -218,8 +218,8 @@ Community support for open source usage of this product is available at:
 
 For professional support and access to the full Ignite UI for Web Components suite with advanced grid features:
 - Visit [Infragistics Support](https://www.infragistics.com/support)
-- Explore [Ignite UI for Angular](https://www.infragistics.com/products/ignite-ui-angular)
-- [Register for a trial](https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/getting-started)
+- Explore [Ignite UI for Web Components](https://www.infragistics.com/products/ignite-ui-web-components)
+- [Register for a trial](https://www.infragistics.com/products/ignite-ui-web-components/web-components/components/general-getting-started)
 
 ## License
 

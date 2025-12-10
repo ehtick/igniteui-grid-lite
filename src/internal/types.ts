@@ -43,10 +43,6 @@ export interface GridLiteSortingOptions {
  */
 export interface BaseColumnSortConfiguration<T, K extends Keys<T> = Keys<T>> {
   /**
-   * Whether the sort operations will be case sensitive.
-   */
-  caseSensitive?: boolean;
-  /**
    * Custom comparer function for sort operations for this column.
    */
   comparer?: SortComparer<T, K>;
@@ -58,16 +54,6 @@ export interface BaseColumnSortConfiguration<T, K extends Keys<T> = Keys<T>> {
 export type ColumnSortConfiguration<T, K extends Keys<T> = Keys<T>> = K extends Keys<T>
   ? BaseColumnSortConfiguration<T, K>
   : never;
-
-/**
- * Extended filter configuration for a column.
- */
-export interface ColumnFilterConfiguration {
-  /**
-   * Whether the filter operations will be case sensitive.
-   */
-  caseSensitive?: boolean;
-}
 
 /** Configuration object for grid columns. */
 export interface BaseColumnConfiguration<T extends object, K extends Keys<T> = Keys<T>> {
@@ -110,13 +96,25 @@ export interface BaseColumnConfiguration<T extends object, K extends Keys<T> = K
    */
   resizable?: boolean;
   /**
-   * Whether the column can be sorted or not.
+   * Whether the column can be sorted.
    */
-  sort?: ColumnSortConfiguration<T, K> | boolean;
+  sortable?: boolean;
   /**
-   * Whether filter operation can be applied on the column or not.
+   * Whether the sort operations will be case sensitive.
    */
-  filter?: ColumnFilterConfiguration | boolean;
+  sortingCaseSensitive?: boolean;
+  /**
+   * Sort configuration options for the column (e.g., custom comparer).
+   */
+  sortConfiguration?: ColumnSortConfiguration<T, K>;
+  /**
+   * Whether the column can be filtered.
+   */
+  filterable?: boolean;
+  /**
+   * Whether the filter operations will be case sensitive.
+   */
+  filteringCaseSensitive?: boolean;
   /**
    * Header template callback.
    */

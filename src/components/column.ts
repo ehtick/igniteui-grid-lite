@@ -6,7 +6,6 @@ import { registerComponent } from '../internal/register.js';
 import { GRID_COLUMN_TAG } from '../internal/tags.js';
 import type {
   BaseColumnConfiguration,
-  ColumnFilterConfiguration,
   ColumnSortConfiguration,
   IgcCellContext,
   IgcHeaderContext,
@@ -62,13 +61,25 @@ export class IgcGridLiteColumn<T extends object>
   @property({ type: Boolean })
   public resizable = false;
 
-  /** Sort configuration for the column. */
-  @property({ attribute: false })
-  public sort?: ColumnSortConfiguration<T> | boolean = false;
+  /** Indicates whether the column is sortable. */
+  @property({ type: Boolean })
+  public sortable = false;
 
-  /** Filter configuration for the column. */
+  /** Whether sort operations will be case sensitive. */
+  @property({ type: Boolean, attribute: 'sorting-case-sensitive' })
+  public sortingCaseSensitive = false;
+
+  /** Sort configuration for the column (e.g., custom comparer). */
   @property({ attribute: false })
-  public filter?: ColumnFilterConfiguration | boolean = false;
+  public sortConfiguration?: ColumnSortConfiguration<T>;
+
+  /** Indicates whether the column is filterable. */
+  @property({ type: Boolean })
+  public filterable = false;
+
+  /** Whether filter operations will be case sensitive. */
+  @property({ type: Boolean, attribute: 'filtering-case-sensitive' })
+  public filteringCaseSensitive = false;
 
   /** Custom header template for the column. */
   @property({ attribute: false })

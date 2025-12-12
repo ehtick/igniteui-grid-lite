@@ -19,7 +19,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/IgniteUI/igniteui-grid-lite.git",
+    "url": "https://github.com/IgniteUI/igniteui-grid-lite.git"
   },
   "bugs": {
     "url": "https://github.com/igniteui/igniteui-grid-lite/issues"

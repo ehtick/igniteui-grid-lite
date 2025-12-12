@@ -12,7 +12,7 @@
   "author": "Infragistics",
   "repository": {
     "type": "git",
-    "url": "https://github.com/igniteui/igniteui-grid-lite.git"
+    "url": "https://github.com/igniteui/igniteui-grid-lite"
   },
   "type": "module",
   "engines": {

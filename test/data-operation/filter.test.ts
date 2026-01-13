@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 import type { ColumnConfiguration, DataType, Keys } from '../../src/internal/types.js';
-import { getFilterOperandsFor } from '../../src/internal/utils.js';
+import { getFilterOperandsFor, resolveFieldValue } from '../../src/internal/utils.js';
 import { FilterState } from '../../src/operations/filter/state.js';
 import type { FilterExpression, OperandKeys } from '../../src/operations/filter/types.js';
 import FilterDataOperation from '../../src/operations/filter.js';
@@ -36,7 +36,7 @@ class TDDFilterState<T extends object> {
   ) {
     const config = {
       field: key,
-      dataType: typeof this.data[0][key] as DataType,
+      dataType: typeof resolveFieldValue(this.data[0], key) as DataType,
     } as ColumnConfiguration<T>;
 
     this.#state.set({
@@ -274,6 +274,39 @@ describe('Filter operations', () => {
       expect(TDD.first.importance).to.equal('high');
       expect(TDD.last.active).to.equal(true);
       expect(TDD.last.importance).to.equal('high');
+    });
+  });
+
+  describe('Nested field operands', () => {
+    it('`contains` on nested path [case insensitive]', () => {
+      TDD.addCondition('address.city', 'contains', { searchTerm: 'new' }).run();
+      // New York entries: id 1, 4, 7
+      expect(TDD.result).lengthOf(3);
+      expect(TDD.result.every((r) => r.address.city === 'New York')).to.be.true;
+    });
+
+    it('`equals` on nested path', () => {
+      TDD.addCondition('address.city', 'equals', { searchTerm: 'Chicago' }).run();
+      // Chicago entries: id 3, 5, 8
+      expect(TDD.result).lengthOf(3);
+      expect(TDD.result.every((r) => r.address.city === 'Chicago')).to.be.true;
+    });
+
+    it('`greaterThan` on nested number path', () => {
+      TDD.addCondition('address.code', 'greaterThan', { searchTerm: 80000 }).run();
+      // Codes > 80000: 90001, 90002
+      expect(TDD.result).lengthOf(2);
+      expect(TDD.result.every((r) => r.address.code > 80000)).to.be.true;
+    });
+
+    it('Multiple conditions with nested path', () => {
+      TDD.addCondition('address.city', 'equals', { searchTerm: 'Chicago' })
+        .addCondition('active', 'true')
+        .run();
+
+      // Chicago + active: id 3, 5, 8
+      expect(TDD.result).lengthOf(3);
+      expect(TDD.result.every((r) => r.address.city === 'Chicago' && r.active === true)).to.be.true;
     });
   });
 });

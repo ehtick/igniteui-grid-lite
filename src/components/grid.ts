@@ -1,6 +1,7 @@
 import { ContextProvider } from '@lit/context';
 import type { RenderItemFunction } from '@lit-labs/virtualizer/virtualize.js';
 import {
+  θaddThemingController as addThemingController,
   IgcButtonComponent,
   IgcChipComponent,
   IgcDropdownComponent,
@@ -19,7 +20,6 @@ import { getElementFromEventPath } from '../internal/element-from-event-path.js'
 import { EventEmitterBase } from '../internal/mixins/event-emitter.js';
 import { registerComponent } from '../internal/register.js';
 import { GRID_TAG } from '../internal/tags.js';
-import { addThemingController } from '../internal/theming.js';
 import type {
   ColumnConfiguration,
   DataPipelineConfiguration,
